@@ -29,12 +29,12 @@ Creativeの管理テーブル : # TO DO
     - negocia_aws_profile_nameとnegocia_s3_ruiを入力することで、すでにs3に存在するものをダウンロード対象から除外
     - profileはdefalutに設定されているものは必要ない
  ```
-poetry run python src/dowonload_gcs_file.py [csv_path] [save_dir] [--irep_profile_name] [--negocia_aws_profile_name]  [--negocia_s3_rui]
+poetry run python src/dowonload_aws_file.py [csv_path] [save_dir] --irep_profile [irep_profile_name] --negocia_profil [negocia_aws_profile_name] --negocia_s3_rui [negocia_s3_rui]
  ```
 - gcsからのダウンロード
     - negocia_aws_profile_nameとnegocia_s3_ruiを入力することで、すでにs3に存在するものをダウンロード対象から除外
 ```
-poetry run python src/dowonload_gcs_file.py [csv_path] [save_dir]  [--negocia_aws_profile_name]  [--negocia_s3_rui]
+poetry run python src/dowonload_gcs_file.py [csv_path] [save_dir] --negocia_profil [negocia_aws_profile_name]  --negocia_s3_rui [negocia_s3_rui]
 ```
 
 ### 3. サイズの付与
