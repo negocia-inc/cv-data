@@ -1,17 +1,13 @@
-import fire
 import os
 import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from util import _list_all_objects
 
+import fire
 import pandas as pd
-from loguru import logger
-
 from aws_client import negocia_s3_client, pingpong_s3_client
-
-
-
+from loguru import logger
+from util import _list_all_objects
 
 negocia_bucket = "image-scorer-ml-poc"
 negocia_s3_dir = "image_data/pingpong/crdx-data-001/prd/raw_human_cleansed"
@@ -22,7 +18,7 @@ pingpong_raw_s3_dir = "prd/raw"
 pingpong_cleansing_s3_dir = "prd/raw_human_cleansed"
 
 
-def  _get_target_pingpong_keys(csv_path):
+def _get_target_pingpong_keys(csv_path):
     csv_df = pd.read_csv(csv_path)
     already_cleansnig_list = list(csv_df["creative_id"].astype(str) + ".psd")
 
@@ -41,18 +37,17 @@ def  _get_target_pingpong_keys(csv_path):
 
     df_negocia = pd.concat([pd.DataFrame(r["Contents"]) for r in negocia_response_list])
 
-
-    
-    df_cleansing_pingpong  =  df_cleansing_pingpong .rename(columns={"Key": "pingpong_key"})
-    df_cleansing_pingpong ["file_id"] =  df_cleansing_pingpong.pingpong_key.apply(
+    df_cleansing_pingpong = df_cleansing_pingpong.rename(
+        columns={"Key": "pingpong_key"}
+    )
+    df_cleansing_pingpong["file_id"] = df_cleansing_pingpong.pingpong_key.apply(
         lambda s: s.removeprefix(f"{pingpong_cleansing_s3_dir}/")
     )
-    
+
     df_negocia = df_negocia.rename(columns={"Key": "negocia_key"})
     df_negocia["file_id"] = df_negocia.negocia_key.apply(
         lambda s: s.removeprefix(f"{negocia_s3_dir}/")
     )
-
 
     # merge処理
     df_cleansing_merged = pd.merge(
@@ -61,21 +56,25 @@ def  _get_target_pingpong_keys(csv_path):
         on="file_id",
         suffixes=("_negocia", "_pingpong"),
         how="right",
-    ).dropna(subset=['pingpong_key'])
+    ).dropna(subset=["pingpong_key"])
 
     # csvによって取得するファイルを絞る
-    df_cleansing_merged = df_cleansing_merged[df_cleansing_merged["file_id"].isin(already_cleansnig_list)]
+    df_cleansing_merged = df_cleansing_merged[
+        df_cleansing_merged["file_id"].isin(already_cleansnig_list)
+    ]
 
     # 同じファイルサイズの場合は除外
-    df_cleansing_target = df_cleansing_merged.pipe(lambda df: df[df.Size_pingpong != df.Size_negocia])
+    df_cleansing_target = df_cleansing_merged.pipe(
+        lambda df: df[df.Size_pingpong != df.Size_negocia]
+    )
 
     df_cleansing_target.to_csv("transfer.csv", index=False)
-
 
     # ダウンロードするファイルのpathリストを作成
     target_cleansing_pingpong_keys = list(df_cleansing_target.pingpong_key)
 
     return target_cleansing_pingpong_keys
+
 
 def _transfer_object(pingpong_key):
     filename = Path(pingpong_key).name
