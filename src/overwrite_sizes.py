@@ -24,6 +24,7 @@ def create_parser() -> argparse.Namespace:
     args = parser.parse_args()
     return args
 
+
 # TO DO 動画対応
 def main(csv_path, image_dir):
     df = pd.read_csv(csv_path, compression="gzip")
@@ -42,7 +43,7 @@ def main(csv_path, image_dir):
     df.update(sizes)
     print(df.columns)
 
-    df.to_csv("test.csv.gz", compression="gzip", index = False)
+    df.to_csv("test.csv.gz", compression="gzip", index=False)
 
 
 if __name__ == "__main__":
