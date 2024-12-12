@@ -16,6 +16,7 @@ pillow = "^11.0.0"
 black = "^24.10.0"
 isort = "^5.13.2"
 opencv-python = "^4.10.0.84"
+tqdm = "^4.67.1"
 
 
 [build-system]
