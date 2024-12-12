@@ -61,7 +61,7 @@ def main(args):
     if args.no_ad_group_id:
         duplicate_subset.remove("ad_group_id")
     result = concatenated.drop_duplicates(subset=duplicate_subset, keep="first")
-    result.to_csv(args.save_path, single_file=True, index=False, compression="gzip")
+    result.to_csv(args.save_path, index=False, compression="gzip")
 
 
 if __name__ == "__main__":

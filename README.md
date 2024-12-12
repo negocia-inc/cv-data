@@ -10,8 +10,8 @@ Creativeの管理テーブル : # TO DO
 ## 実績とそれに紐づいたCreative(画像・動画)の取得手順
 1. 実績取得
 2. Creativeのダウンロード
-3. サイズの付与
-4. csvの結合
+3. csvの結合
+4. サイズの付与
 5. awsアップロード
 6. 管理テーブルに追加
 
@@ -37,18 +37,16 @@ poetry run python src/dowonload_aws_file.py [csv_path] [save_dir] --irep_profile
 poetry run python src/dowonload_gcs_file.py [csv_path] [save_dir] --negocia_profil [negocia_aws_profile_name]  --negocia_s3_rui [negocia_s3_rui]
 ```
 
-### 3. サイズの付与
-画像・動画サイズはクエリからの情報が異なる場合があるので、実際のクリエイティブを参照し付与する
-```
-poetry run python src/overwrite_size.py [csv_path] [image_dir]
-```
-
-### 4. csvの結合
+### 3. csvの結合
 hdyとxoneからそれぞれ取得している場合は結合して保存する。
 ```
-poetry run python src/concat_with_priority.py [hdy_csv_path] [creative_report_csv_path]
+poetry run python src/concat_with_priority.py [hdy_csv_path] [creative_report_csv_path] [save_path]
 ```
-
+### 4. サイズの付与
+画像・動画サイズはクエリからの情報が異なる場合があるので、実際のクリエイティブを参照し付与する
+```
+poetry run python src/overwrite_size.py [csv_path] [image_dir] [save_paht] [image|video]
+```
 
 ### 5. awsにアップロード
 - 実績
