@@ -23,15 +23,15 @@ Creativeの管理テーブル : # TO DO
 
 ### 2. Creativeのダウンロード
 - awsからのダウンロード
-    - negocia_aws_profile_nameとnegocia_s3_ruiを入力することで、すでにs3に存在するものをダウンロード対象から除外
-    - profileはdefalutに設定されているものは必要ない
+    - negocia_aws_profile_nameとnegocia_s3_uriを入力することで、すでにs3に存在するものをダウンロード対象から除外
+    - profileはdefaultに設定されているものは必要ない
  ```
-poetry run python src/dowonload_aws_file.py [csv_path] [save_dir] --irep_profile [irep_profile_name] --negocia_profil [negocia_aws_profile_name] --negocia_s3_rui [negocia_s3_rui]
+poetry run python src/download_aws_file.py [csv_path] [save_dir] --irep_profile [irep_profile_name] --negocia_profile [negocia_aws_profile_name] --negocia_s3_uri [negocia_s3_uri]
  ```
 - gcsからのダウンロード
-    - negocia_aws_profile_nameとnegocia_s3_ruiを入力することで、すでにs3に存在するものをダウンロード対象から除外
+    - negocia_aws_profile_nameとnegocia_s3_uriを入力することで、すでにs3に存在するものをダウンロード対象から除外
 ```
-poetry run python src/dowonload_gcs_file.py [csv_path] [save_dir] --negocia_profil [negocia_aws_profile_name]  --negocia_s3_rui [negocia_s3_rui]
+poetry run python src/download_gcs_file.py [csv_path] [save_dir] --negocia_profile [negocia_aws_profile_name]  --negocia_s3_uri [negocia_s3_uri]
 ```
 
 ### 3. csvの結合
@@ -42,7 +42,7 @@ poetry run python src/concat_with_priority.py [hdy_csv_path] [creative_report_cs
 ### 4. サイズの付与
 画像・動画サイズはクエリからの情報が異なる場合があるので、実際のクリエイティブを参照し付与する
 ```
-poetry run python src/overwrite_size.py [csv_path] [image_dir] [save_paht] [image|video]
+poetry run python src/overwrite_size.py [csv_path] [image_dir] [save_path] [image|video]
 ```
 
 ### 5. awsにアップロード
