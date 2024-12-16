@@ -34,7 +34,7 @@ poetry run python src/dowonload_aws_file.py [csv_path] [save_dir] --irep_profile
 - gcsからのダウンロード
     - negocia_aws_profile_nameとnegocia_s3_ruiを入力することで、すでにs3に存在するものをダウンロード対象から除外
 ```
-poetry run python src/dowonload_gcs_file.py [csv_path] [save_dir] --negocia_profil [negocia_aws_profile_name]  --negocia_s3_rui [negocia_s3_rui]
+poetry run python src/download_gcs_file.py [csv_path] [save_dir] --negocia_profile [negocia_aws_profile_name]  --negocia_s3_uri [negocia_s3_uri]
 ```
 
 ### 3. csvの結合
