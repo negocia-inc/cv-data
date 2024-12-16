@@ -1,0 +1,4 @@
+loguru
+fire
+boto3
+pandas
