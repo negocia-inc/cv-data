@@ -4,9 +4,8 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import pandas as pd
-from loguru import logger
-
 from aws_client import negocia_s3_client, pingpong_s3_client
+from loguru import logger
 
 max_wait = 5
 negocia_bucket = "image-scorer-ml-poc"
