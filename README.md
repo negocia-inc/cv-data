@@ -32,7 +32,7 @@ Creativeの管理テーブル : # TO DO
 poetry run python src/download_aws_file.py [csv_path] [save_dir] --irep_profile [irep_profile_name] --negocia_profile [negocia_aws_profile_name] --negocia_s3_uri [negocia_s3_uri]
  ```
 - gcsからのダウンロード
-    - negocia_aws_profile_nameとnegocia_s3_ruiを入力することで、すでにs3に存在するものをダウンロード対象から除外
+    - negocia_aws_profile_nameとnegocia_s3_uriを入力することで、すでにs3に存在するものをダウンロード対象から除外
 ```
 poetry run python src/download_gcs_file.py [csv_path] [save_dir] --negocia_profile [negocia_aws_profile_name]  --negocia_s3_uri [negocia_s3_uri]
 ```
