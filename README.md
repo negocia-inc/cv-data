@@ -45,7 +45,7 @@ poetry run python src/concat_with_priority.py [hdy_csv_path] [creative_report_cs
 ### 4. サイズの付与
 画像・動画サイズはクエリからの情報が異なる場合があるので、実際のクリエイティブを参照し付与する
 ```
-poetry run python src/overwrite_size.py [csv_path] [image_dir] [save_paht] [image|video]
+poetry run python src/overwrite_size.py [csv_path] [image_dir] [save_path] [image|video]
 ```
 
 ### 5. awsにアップロード
