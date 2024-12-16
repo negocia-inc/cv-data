@@ -1,7 +1,7 @@
 ## 取得済みデータ
-実績の管理テーブル : https://www.notion.so/126db36cc60180849852ce73f3728c1b
-
-Creativeの管理テーブル : # TO DO
+[Notionページ](https://www.notion.so/126db36cc60180849852ce73f3728c1b)
+- 実績の管理テーブル : https://www.notion.so/123db36cc60180d6833fcfe647220c2a?v=902e1648012849fcb06940ec0dc9fe26
+- Creativeの管理テーブル : https://www.notion.so/15adb36cc60180dead18ce327b16d583?v=fa0e8b583be2486f84e998d20e21797d
 
 
 ## 実績とそれに紐づいたCreative(画像・動画)の取得手順
@@ -56,7 +56,7 @@ aws s3 sync [creative_dir] [s3_dir]
 ```
 
 ### 6. 管理テーブルに追加
+Creativeで同媒体の場合は既存の場所に追加する
+- 実績の管理テーブル : https://www.notion.so/123db36cc60180d6833fcfe647220c2a?v=902e1648012849fcb06940ec0dc9fe26
+- Creativeの管理テーブル : https://www.notion.so/15adb36cc60180dead18ce327b16d583?v=fa0e8b583be2486f84e998d20e21797d
 
-実績の管理テーブル : https://www.notion.so/126db36cc60180849852ce73f3728c1b
-
-Creativeの管理テーブル : # TO DO
