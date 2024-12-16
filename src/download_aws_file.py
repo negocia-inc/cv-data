@@ -79,7 +79,7 @@ def _list_all_objects(s3_client, bucket, prefix, **kwargs):
     return responses
 
 
-def _get_negocai_s3_file_list(negocia_profile, negocia_s3_uri):
+def _get_negocia_s3_file_list(negocia_profile, negocia_s3_uri):
     negocia_s3_client = get_s3_client(negocia_profile)
 
     negocia_s3_uri = Path(negocia_s3_uri)
@@ -109,14 +109,14 @@ def main():
     args = create_parser()
     performance_df = pd.read_csv(args.csv_path)
     if args.negocia_s3_uri:
-        target_keys = _get_negocai_s3_file_list(
+        target_keys = _get_negocia_s3_file_list(
             args.negocia_profile, args.negocia_s3_uri
         )
         performance_df = performance_df[
             ~performance_df.id.astype(str).isin(target_keys)
         ]
     download_list = list(performance_df.path.unique())
-    logger.info(f"dowonload file : {len(download_list)}")
+    logger.info(f"download file : {len(download_list)}")
     irep_s3 = get_s3_client(args.irep_profile)
     irep_download = partial(download_files_from_s3, irep_s3, args.save_dir)
     with ThreadPoolExecutor(max_workers=max_workers) as executor:

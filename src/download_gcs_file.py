@@ -92,7 +92,7 @@ def _list_all_objects(s3_client, bucket, prefix, **kwargs):
     return responses
 
 
-def _get_negocai_s3_file_list(negocia_profile, negocia_s3_uri):
+def _get_negocia_s3_file_list(negocia_profile, negocia_s3_uri):
     negocia_s3_client = get_s3_client(negocia_profile)
 
     negocia_s3_uri = Path(negocia_s3_uri)
@@ -134,9 +134,9 @@ def main():
     args = create_parser()
     save_dir = Path(args.save_dir)
     performance_df = pd.read_csv(args.csv_path)
-    logger.info(f"dowonload file : {len(performance_df.path.unique())}")
+    logger.info(f"download file : {len(performance_df.path.unique())}")
     if args.negocia_s3_uri:
-        target_keys = _get_negocai_s3_file_list(
+        target_keys = _get_negocia_s3_file_list(
             args.negocia_profile, args.negocia_s3_uri
         )
         performance_df = performance_df[
@@ -144,7 +144,7 @@ def main():
         ]
     performance_df = performance_df[["id", "path"]].drop_duplicates()
     download_dict = dict(zip(performance_df["id"], performance_df["path"]))
-    logger.info(f"dowonload file without s3: {len(download_dict)}")
+    logger.info(f"download file without s3: {len(download_dict)}")
     storage_client = storage.Client()
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
@@ -165,7 +165,7 @@ def main():
             )
 
         concurrent.futures.wait(futures)
-    logger.info("all dwonload finish")
+    logger.info("all download finish")
 
 
 if __name__ == "__main__":
